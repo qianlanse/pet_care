@@ -287,21 +287,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pricing" data-animate="section">
-          <div className="section-inner">
-            <div className="section-head">
-              <div>
-                <div className="section-label">价格套餐</div>
-                <h2>把价格说清楚，让回访更轻松</h2>
-                <p>价格按照体型、毛量和护理复杂度做基础区分。下列为常规区间，特殊毛结和额外护理会在开始前先确认。</p>
-              </div>
-              <div className="section-side">如果门店主打社区复购，套餐不宜过多。保留 2-3 个清晰档位，比堆很多营销名词更有效。</div>
-            </div>
-
-            <PricingGrid plans={pricing} />
-          </div>
-        </section>
-
         <section data-animate="section">
           <div className="section-inner">
             <div className="section-head">
@@ -342,6 +327,21 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        <section id="pricing" data-animate="section">
+          <div className="section-inner">
+            <div className="section-head">
+              <div>
+                <div className="section-label">价格套餐</div>
+                <h2>把价格说清楚，让回访更轻松</h2>
+                <p>价格按照体型、毛量和护理复杂度做基础区分。下列为常规区间，特殊毛结和额外护理会在开始前先确认。</p>
+              </div>
+              <div className="section-side">如果门店主打社区复购，套餐不宜过多。保留 2-3 个清晰档位，比堆很多营销名词更有效。</div>
+            </div>
+
+            <PricingGrid plans={pricing} />
           </div>
         </section>
 

@@ -113,6 +113,16 @@ test("pricing grid moves the featured class to the hovered plan", () => {
   assert.match(pricingGrid, /className={`pricing-card\${activeIndex === index \? " featured" : ""}`}/);
 });
 
+test("review section appears before pricing section", () => {
+  const page = read("app/page.tsx");
+  const reviewIndex = page.indexOf('<div className="section-label">到店反馈</div>');
+  const pricingIndex = page.indexOf('<div className="section-label">价格套餐</div>');
+
+  assert.ok(reviewIndex > -1);
+  assert.ok(pricingIndex > -1);
+  assert.ok(reviewIndex < pricingIndex);
+});
+
 test("review cards include ratings, customer avatars, and names", () => {
   const page = read("app/page.tsx");
   const styles = read("app/globals.css");
