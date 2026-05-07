@@ -540,6 +540,42 @@ section {
   box-shadow: 0 14px 34px rgba(71, 53, 38, 0.06);
 }
 
+.pricing-card {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  border-color: rgba(82, 64, 49, 0.12);
+}
+
+.pricing-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-card::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  z-index: -1;
+  border-radius: calc(var(--radius-xl) + 9px);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(214, 144, 83, 0.32), transparent 34%),
+    radial-gradient(circle at 82% 100%, rgba(111, 139, 116, 0.28), transparent 36%),
+    linear-gradient(115deg, transparent 18%, rgba(255, 250, 244, 0.78) 45%, transparent 68%);
+  filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-10px) scale(0.98);
+  transition:
+    opacity 180ms var(--ease-out-quart),
+    transform 240ms var(--ease-out-quart);
+}
+
+.pricing-card:hover::after {
+  opacity: 0.92;
+  animation: pricing-shadow-sweep 1.45s var(--ease-out-quart) infinite alternate;
+}
+
 .service-grid article:nth-child(odd) {
   transform: translateY(14px);
 }
@@ -553,7 +589,8 @@ section {
   transition:
     transform 240ms var(--ease-out-quart),
     box-shadow 240ms var(--ease-out-quart),
-    background 240ms ease;
+    background 240ms ease,
+    border-color 240ms ease;
 }
 
 .service-grid article:hover,
@@ -565,6 +602,14 @@ section {
   transform: translateY(-6px);
   box-shadow: 0 20px 42px rgba(71, 53, 38, 0.1);
   background: rgba(255, 250, 244, 0.9);
+}
+
+.pricing-card:hover {
+  background: linear-gradient(180deg, rgba(255, 246, 234, 0.96), rgba(255, 250, 244, 0.94));
+  border-color: rgba(214, 144, 83, 0.44);
+  box-shadow:
+    0 24px 46px rgba(71, 53, 38, 0.12),
+    0 0 0 5px rgba(214, 144, 83, 0.08);
 }
 
 .service-index,
@@ -1023,6 +1068,9 @@ section {
   margin-top: 18px;
   font-size: 34px;
   color: var(--sage-deep);
+  transition:
+    color 220ms ease,
+    transform 220ms var(--ease-out-quart);
 }
 
 .pricing-card span {
@@ -1030,6 +1078,7 @@ section {
   margin-top: 6px;
   color: var(--muted);
   font-size: 13px;
+  transition: color 220ms ease;
 }
 
 .pricing-card ul {
@@ -1042,11 +1091,48 @@ section {
   padding: 10px 0;
   color: var(--muted);
   border-top: 1px solid rgba(82, 64, 49, 0.08);
+  transition:
+    color 220ms ease,
+    border-color 220ms ease;
 }
 
 .pricing-card.featured {
   background: linear-gradient(180deg, rgba(111, 139, 116, 0.13), rgba(255, 250, 244, 0.86));
   border-color: rgba(111, 139, 116, 0.24);
+}
+
+.pricing-card.featured:hover {
+  background: linear-gradient(180deg, rgba(111, 139, 116, 0.17), rgba(255, 250, 244, 0.92));
+  border-color: rgba(214, 144, 83, 0.44);
+}
+
+.pricing-card .section-label {
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms var(--ease-out-quart);
+}
+
+.pricing-card:hover .section-label {
+  background: rgba(77, 102, 81, 0.12);
+  border-color: rgba(77, 102, 81, 0.32);
+  color: var(--sage-deep);
+  transform: translateY(-1px);
+}
+
+.pricing-card:hover strong {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.pricing-card:hover span,
+.pricing-card:hover li {
+  color: #4f453b;
+}
+
+.pricing-card:hover li {
+  border-color: rgba(214, 144, 83, 0.2);
 }
 
 .review small {
@@ -1234,6 +1320,16 @@ footer {
   }
 }
 
+@keyframes pricing-shadow-sweep {
+  from {
+    transform: translateX(-10px) scale(0.98);
+  }
+
+  to {
+    transform: translateX(10px) scale(1.02);
+  }
+}
+
 html.motion-ready [data-animate] {
   opacity: 0;
   transform: translateY(22px) scale(0.985);
@@ -1412,5 +1508,9 @@ html.motion-ready .service-grid article:nth-child(odd)[data-animate].is-visible:
   html.motion-ready [data-animate] {
     opacity: 1;
     transform: none;
+  }
+
+  .pricing-card:hover::after {
+    animation: none !important;
   }
 }
