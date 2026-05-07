@@ -84,6 +84,35 @@ test("page has purposeful motion hooks with reduced-motion fallback", () => {
   assert.match(styles, /prefers-reduced-motion: reduce/);
 });
 
+test("pricing cards expose animated hover selection styles", () => {
+  const styles = read("app/globals.css");
+
+  assert.match(styles, /\.pricing-card::after/);
+  assert.match(styles, /\.pricing-card:hover::after/);
+  assert.match(styles, /@keyframes pricing-shadow-sweep/);
+  assert.match(styles, /\.pricing-card:hover\s*{[^}]*background:/s);
+  assert.match(styles, /\.pricing-card:hover \.section-label/);
+  assert.match(styles, /\.pricing-card:hover strong/);
+  assert.match(styles, /\.pricing-card\.featured:hover/);
+  assert.match(styles, /animation: none !important/);
+  assert.doesNotMatch(styles, /mask-composite: exclude/);
+});
+
+test("pricing grid moves the featured class to the hovered plan", () => {
+  assert.ok(exists("app/components/PricingGrid.tsx"));
+
+  const page = read("app/page.tsx");
+  const pricingGrid = read("app/components/PricingGrid.tsx");
+
+  assert.match(page, /<PricingGrid plans={pricing} \/>/);
+  assert.match(pricingGrid, /"use client"/);
+  assert.match(pricingGrid, /useState/);
+  assert.match(pricingGrid, /onMouseEnter/);
+  assert.match(pricingGrid, /setActiveIndex\(index\)/);
+  assert.match(pricingGrid, /onMouseLeave/);
+  assert.match(pricingGrid, /className={`pricing-card\${activeIndex === index \? " featured" : ""}`}/);
+});
+
 test("review cards include ratings, customer avatars, and names", () => {
   const page = read("app/page.tsx");
   const styles = read("app/globals.css");
@@ -92,6 +121,8 @@ test("review cards include ratings, customer avatars, and names", () => {
   assert.match(source, /review-carousel/);
   assert.match(source, /review-track/);
   assert.match(source, /review-set/);
+  assert.match(styles, /\.review-carousel\s*\{[^}]*width: 100vw/s);
+  assert.match(styles, /\.review-carousel\s*\{[^}]*margin-inline: calc\(50% - 50vw\)/s);
   assert.match(styles, /@keyframes review-scroll/);
   assert.match(styles, /animation-play-state: paused/);
   assert.match(source, /review-rating/);

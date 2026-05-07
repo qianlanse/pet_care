@@ -1,5 +1,6 @@
 import BookingForm from "./components/BookingForm";
 import EnvironmentCarousel from "./components/EnvironmentCarousel";
+import PricingGrid from "./components/PricingGrid";
 import ScrollReveal from "./components/ScrollReveal";
 
 const services = [
@@ -297,21 +298,7 @@ export default function Home() {
               <div className="section-side">如果门店主打社区复购，套餐不宜过多。保留 2-3 个清晰档位，比堆很多营销名词更有效。</div>
             </div>
 
-            <div className="pricing-grid">
-              {pricing.map((item) => (
-                <article className={`pricing-card${item.featured ? " featured" : ""}`} key={item.title} data-animate="card">
-                  <div className="section-label">{item.label}</div>
-                  <h3>{item.title}</h3>
-                  <strong>{item.price}</strong>
-                  <span>{item.desc}</span>
-                  <ul>
-                    {item.items.map((detail) => (
-                      <li key={detail}>{detail}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
+            <PricingGrid plans={pricing} />
           </div>
         </section>
 
