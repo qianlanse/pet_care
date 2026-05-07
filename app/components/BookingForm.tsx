@@ -30,12 +30,11 @@ export default function BookingForm() {
           <span>手机号</span>
           <input name="phone" type="tel" placeholder="用于确认预约" required />
         </label>
+        <label className="booking-wide">
+          <span>期望到店时间</span>
+          <input name="arrivalTime" type="datetime-local" required />
+        </label>
       </div>
-
-      <label>
-        <span>期望到店时间</span>
-        <input name="arrivalTime" type="datetime-local" required />
-      </label>
 
       <div className="booking-grid">
         <label>

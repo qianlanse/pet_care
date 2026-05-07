@@ -437,6 +437,10 @@ h1 {
   gap: 12px;
 }
 
+.booking-wide {
+  grid-column: 1 / -1;
+}
+
 .booking-form button {
   width: 100%;
   min-height: 48px;

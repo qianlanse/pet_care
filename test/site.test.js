@@ -128,6 +128,22 @@ test("hero uses full-bleed image background with an appointment form overlay", (
   assert.match(source, /预约已收到/);
 });
 
+test("booking form places expected arrival time below contact and phone", () => {
+  const form = read("app/components/BookingForm.tsx");
+  const styles = read("app/globals.css");
+  const contactIndex = form.indexOf('name="contactName"');
+  const phoneIndex = form.indexOf('name="phone"');
+  const arrivalIndex = form.indexOf('name="arrivalTime"');
+  const petTypeIndex = form.indexOf('name="petType"');
+
+  assert.ok(contactIndex > -1);
+  assert.ok(phoneIndex > contactIndex);
+  assert.ok(arrivalIndex > phoneIndex);
+  assert.ok(petTypeIndex > arrivalIndex);
+  assert.match(form, /booking-wide/);
+  assert.match(styles, /\.booking-wide/);
+});
+
 test("location section uses a full-bleed map image with absolute store info overlay", () => {
   const page = read("app/page.tsx");
   const styles = read("app/globals.css");
