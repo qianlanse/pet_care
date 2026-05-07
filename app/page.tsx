@@ -1,3 +1,4 @@
+import BookingForm from "./components/BookingForm";
 import EnvironmentCarousel from "./components/EnvironmentCarousel";
 import ScrollReveal from "./components/ScrollReveal";
 
@@ -92,7 +93,7 @@ export default function Home() {
             <a href="#process">护理流程</a>
             <a href="#pricing">价格套餐</a>
             <a href="#location">门店地址</a>
-            <a className="nav-cta" href="#contact">
+            <a className="nav-cta" href="#booking">
               预约洗护
             </a>
           </nav>
@@ -102,46 +103,47 @@ export default function Home() {
       <main id="top">
         <div className="hero-wrap">
           <section className="hero" data-animate="hero">
-            <div className="hero-copy">
-              <div className="eyebrow">温和清洁 / 独立吹护 / 安静环境</div>
-              <h1>把每一次洗护，做成宠物愿意再来的安心体验。</h1>
-              <p>
-                木屿宠物洗护专注猫狗基础清洁、精细修毛与日常护理。我们把节奏放慢，把流程做细，让敏感、初次洗护和高频护理的宠物都能在稳定环境里完成舒适洗护。
-              </p>
-              <div className="hero-actions">
-                <a href="#contact">预约洗护</a>
-                <a href="#services">查看服务</a>
-              </div>
-              <div className="hero-meta">
-                <article>
-                  <strong>40-90 分钟</strong>
-                  <span>按体型与毛量分配护理时长，避免赶工。</span>
-                </article>
-                <article>
-                  <strong>一宠一消毒</strong>
-                  <span>接触工具与台面单次清洁，减少交叉刺激。</span>
-                </article>
-                <article>
-                  <strong>可记录习惯</strong>
-                  <span>记下怕风、怕水、偏好姿势，方便下次护理。</span>
-                </article>
-              </div>
+            <div className="hero-background" aria-hidden="true">
+              <img
+                src="https://images.pexels.com/photos/19145883/pexels-photo-19145883.jpeg?auto=compress&cs=tinysrgb&w=1800"
+                alt=""
+              />
             </div>
+            <div className="hero-overlay" aria-hidden="true" />
 
-            <div className="hero-visual">
-              <div className="hero-image-main">
-                <img
-                  src="https://images.pexels.com/photos/19145883/pexels-photo-19145883.jpeg?auto=compress&cs=tinysrgb&w=1400"
-                  alt="美容师在温和地给小狗进行洗护"
-                />
+            <div className="hero-content">
+              <div className="hero-copy">
+                <div className="eyebrow">温和清洁 / 独立吹护 / 安静环境</div>
+                <h1>把每一次洗护，做成宠物愿意再来的安心体验。</h1>
+                <p>
+                  木屿宠物洗护专注猫狗基础清洁、精细修毛与日常护理。我们把节奏放慢，把流程做细，让敏感、初次洗护和高频护理的宠物都能在稳定环境里完成舒适洗护。
+                </p>
+                <div className="hero-actions">
+                  <a href="#booking">预约洗护</a>
+                  <a href="#services">查看服务</a>
+                </div>
+                <div className="hero-meta">
+                  <article>
+                    <strong>40-90 分钟</strong>
+                    <span>按体型与毛量分配护理时长，避免赶工。</span>
+                  </article>
+                  <article>
+                    <strong>一宠一消毒</strong>
+                    <span>接触工具与台面单次清洁，减少交叉刺激。</span>
+                  </article>
+                  <article>
+                    <strong>可记录习惯</strong>
+                    <span>记下怕风、怕水、偏好姿势，方便下次护理。</span>
+                  </article>
+                </div>
+              </div>
+
+              <div className="hero-booking">
+                <BookingForm />
                 <div className="hero-badge">
                   <strong>低刺激洗护</strong>
                   <span>按照肤况与毛发状态选择清洁方案</span>
                 </div>
-              </div>
-              <div className="hero-note">
-                <strong>适合高频回访的社区店</strong>
-                <p>不是做一次惊艳造型，而是让宠物每个月都愿意稳定回来洗得干净、吹得舒服、情绪不过载。</p>
               </div>
             </div>
           </section>
@@ -311,33 +313,32 @@ export default function Home() {
         </section>
 
         <section className="location-section" id="location" data-animate="section">
-          <div className="section-inner">
-            <div className="location-panel">
-              <div className="location-copy">
-                <div className="section-label">门店地址</div>
-                <h2>陕西北路 1620 号，宜川路街道里的安心洗护点</h2>
-                <div className="location-address">
-                  <strong>到店导航地址</strong>
-                  <p>上海市宜川路街道陕西北路 1620 号</p>
-                </div>
-                <div className="location-tips">
-                  <article>
-                    <strong>附近参照</strong>
-                    <span>靠近宜川路与陕西北路路口，地图上红色爪印标记即为门店。</span>
-                  </article>
-                  <article>
-                    <strong>预约建议</strong>
-                    <span>带猫狗到店建议预留 10 分钟适应时间，周末请提前 1-2 天预约。</span>
-                  </article>
-                </div>
-              </div>
+          <div className="location-map-background" aria-hidden="true">
+            <img src="/imagegen/store-location-map.png" alt="" />
+          </div>
+          <div className="location-overlay" aria-hidden="true" />
 
-              <div className="pet-map">
-                <div className="pet-map-caption">
-                  红色爪印为木屿宠物洗护
-                  <span>上海市宜川路街道陕西北路 1620 号</span>
-                </div>
-                <img src="/imagegen/store-location-map.png" alt="可爱宠物店风格地图，红色爪印标出上海市宜川路街道陕西北路 1620 号木屿宠物洗护" />
+          <div className="location-content">
+            <div className="location-copy">
+              <div className="section-label">门店地址</div>
+              <h2>陕西北路 1620 号，宜川路街道里的安心洗护点</h2>
+              <div className="pet-map-caption">
+                红色爪印为木屿宠物洗护
+                <span>上海市宜川路街道陕西北路 1620 号</span>
+              </div>
+              <div className="location-address">
+                <strong>到店导航地址</strong>
+                <p>上海市宜川路街道陕西北路 1620 号</p>
+              </div>
+              <div className="location-tips">
+                <article>
+                  <strong>附近参照</strong>
+                  <span>靠近宜川路与陕西北路路口，地图上红色爪印标记即为门店。</span>
+                </article>
+                <article>
+                  <strong>预约建议</strong>
+                  <span>带猫狗到店建议预留 10 分钟适应时间，周末请提前 1-2 天预约。</span>
+                </article>
               </div>
             </div>
           </div>
@@ -347,19 +348,6 @@ export default function Home() {
       <footer id="contact">
         <div className="footer-inner">
           <div className="footer-grid">
-            <article className="footer-card">
-              <div className="section-label">预约洗护</div>
-              <h3>提前预约，留出安静护理时段</h3>
-              <p>工作日更适合胆小宠物和首次到店护理。建议到店前先说明体型、毛量和性格习惯。</p>
-              <div className="meta">
-                电话：138-0000-1288
-                <br />
-                微信：muyu-petcare
-                <br />
-                营业时间：10:00 - 20:00
-              </div>
-              <a href="tel:13800001288">立即联系</a>
-            </article>
             <article className="footer-card">
               <div className="section-label">到店须知</div>
               <h3>把情况提前说清楚，洗护会顺很多</h3>

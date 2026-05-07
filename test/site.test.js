@@ -29,6 +29,7 @@ test("project is migrated to Next.js App Router with expected scripts", () => {
   assert.ok(exists("app/page.tsx"));
   assert.ok(exists("app/globals.css"));
   assert.ok(exists("app/components/EnvironmentCarousel.tsx"));
+  assert.ok(exists("app/components/BookingForm.tsx"));
 });
 
 test("pet grooming landing page keeps expected copy, assets, and carousel markers", () => {
@@ -97,4 +98,50 @@ test("review cards include ratings, customer avatars, and names", () => {
   assert.match(source, /4\.9/);
   assert.match(source, /5\.0/);
   assert.match(source, /4\.8/);
+});
+
+test("hero uses full-bleed image background with an appointment form overlay", () => {
+  const page = read("app/page.tsx");
+  const form = read("app/components/BookingForm.tsx");
+  const styles = read("app/globals.css");
+  const source = [page, form, styles].join("\n");
+
+  assert.match(page, /<BookingForm \/>/);
+  assert.match(page, /hero-background/);
+  assert.match(page, /hero-content/);
+  assert.match(styles, /\.hero-background/);
+  assert.match(styles, /\.hero-content/);
+  assert.match(styles, /position: absolute/);
+  assert.match(styles, /margin-inline: calc\(50% - 50vw\)/);
+  assert.match(styles, /width: 100vw/);
+  assert.match(styles, /border-radius: 0/);
+  assert.match(styles, /min-height: 820px/);
+  assert.match(styles, /overflow: visible/);
+  assert.match(form, /联系人/);
+  assert.match(form, /手机号/);
+  assert.match(form, /期望到店时间/);
+  assert.match(form, /宠物类型/);
+  assert.match(form, /服务项目/);
+  assert.match(form, /备注/);
+  assert.match(form, /onSubmit/);
+  assert.match(source, /booking-form/);
+  assert.match(source, /预约已收到/);
+});
+
+test("location section uses a full-bleed map image with absolute store info overlay", () => {
+  const page = read("app/page.tsx");
+  const styles = read("app/globals.css");
+  const source = [page, styles].join("\n");
+
+  assert.match(page, /location-map-background/);
+  assert.match(page, /location-overlay/);
+  assert.match(styles, /\.location-section/);
+  assert.match(styles, /\.location-map-background/);
+  assert.match(styles, /\.location-overlay/);
+  assert.match(styles, /margin-inline: calc\(50% - 50vw\)/);
+  assert.match(styles, /width: 100vw/);
+  assert.match(styles, /\.location-copy[\s\S]*position: absolute/);
+  assert.match(styles, /\.location-copy[\s\S]*right: 0/);
+  assert.match(styles, /\.location-map-background[\s\S]*position: absolute/);
+  assert.match(source, /\/imagegen\/store-location-map\.png/);
 });
