@@ -89,12 +89,22 @@ test("review cards include ratings, customer avatars, and names", () => {
   const styles = read("app/globals.css");
   const source = [page, styles].join("\n");
 
+  assert.match(source, /review-carousel/);
+  assert.match(source, /review-track/);
+  assert.match(source, /review-set/);
+  assert.match(styles, /@keyframes review-scroll/);
+  assert.match(styles, /animation-play-state: paused/);
   assert.match(source, /review-rating/);
   assert.match(source, /review-avatar/);
   assert.match(source, /review-person/);
   assert.match(source, /陈女士/);
   assert.match(source, /李先生/);
   assert.match(source, /赵女士/);
+  assert.match(source, /周先生/);
+  assert.match(source, /王女士/);
+  assert.match(source, /林小姐/);
+  assert.match(source, /孙先生/);
+  assert.match(source, /何女士/);
   assert.match(source, /4\.9/);
   assert.match(source, /5\.0/);
   assert.match(source, /4\.8/);

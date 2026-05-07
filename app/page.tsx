@@ -73,6 +73,46 @@ const reviews = [
     avatar: "赵",
     rating: "4.8",
   },
+  {
+    title: "猫咪没有被硬按着洗",
+    copy: "“我家猫很抗拒陌生环境，店员会拆开步骤做，中间让它缓一缓，回家没有躲很久。”",
+    name: "周先生",
+    type: "猫咪轻护顾客",
+    avatar: "周",
+    rating: "4.9",
+  },
+  {
+    title: "修毛细节能看出来花了时间",
+    copy: "“脸和脚边修得很自然，不是剪完像换了一只狗，耳边的小毛也有整理到。”",
+    name: "王女士",
+    type: "精细修毛顾客",
+    avatar: "王",
+    rating: "5.0",
+  },
+  {
+    title: "会记得上次怕水的位置",
+    copy: "“第二次去的时候他们还记得上次洗肚子会紧张，这次换了顺序，过程明显顺很多。”",
+    name: "林小姐",
+    type: "复购顾客",
+    avatar: "林",
+    rating: "4.9",
+  },
+  {
+    title: "没有为了加项一直推销",
+    copy: "“会把毛结情况讲清楚，也会说哪些可以下次再做，听起来更像是在帮我安排周期。”",
+    name: "孙先生",
+    type: "标准洗护顾客",
+    avatar: "孙",
+    rating: "4.8",
+  },
+  {
+    title: "敏感皮肤洗完没有泛红",
+    copy: "“之前洗完容易抓，这次先看了皮肤状态再选香波，洗完两天都比较稳定。”",
+    name: "何女士",
+    type: "舒缓护理顾客",
+    avatar: "何",
+    rating: "4.9",
+  },
 ];
 
 export default function Home() {
@@ -286,28 +326,34 @@ export default function Home() {
               <div className="section-side">以下文案适合做门店落地页展示，也方便后续替换成真实评价截图或社媒内容。</div>
             </div>
 
-            <div className="review-grid">
-              {reviews.map((review) => (
-                <article className="review" key={review.title} data-animate="card">
-                  <div className="review-topline">
-                    <div className="review-person">
-                      <div className="review-avatar" aria-hidden="true">
-                        {review.avatar}
-                      </div>
-                      <div>
-                        <strong>{review.name}</strong>
-                        <small>{review.type}</small>
-                      </div>
-                    </div>
-                    <div className="review-rating" aria-label={`${review.rating} 分评价`}>
-                      <span>★★★★★</span>
-                      <strong>{review.rating}</strong>
-                    </div>
+            <div className="review-carousel" aria-label="客户到店反馈轮播">
+              <div className="review-track">
+                {[0, 1].map((setIndex) => (
+                  <div className="review-set" key={setIndex} aria-hidden={setIndex === 1}>
+                    {reviews.map((review) => (
+                      <article className="review" key={`${setIndex}-${review.title}`} data-animate="card">
+                        <div className="review-topline">
+                          <div className="review-person">
+                            <div className="review-avatar" aria-hidden="true">
+                              {review.avatar}
+                            </div>
+                            <div>
+                              <strong>{review.name}</strong>
+                              <small>{review.type}</small>
+                            </div>
+                          </div>
+                          <div className="review-rating" aria-label={`${review.rating} 分评价`}>
+                            <span>★★★★★</span>
+                            <strong>{review.rating}</strong>
+                          </div>
+                        </div>
+                        <h3>{review.title}</h3>
+                        <p>{review.copy}</p>
+                      </article>
+                    ))}
                   </div>
-                  <h3>{review.title}</h3>
-                  <p>{review.copy}</p>
-                </article>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
