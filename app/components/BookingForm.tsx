@@ -7,10 +7,47 @@ const serviceItems = ["基础洗护", "精细修毛", "猫咪轻护", "附加护
 
 export default function BookingForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+    const form = event.currentTarget;
+
+    setSubmitted(false);
+    setError("");
+    setIsSubmitting(true);
+
+    const formData = new FormData(form);
+    const payload = {
+      contactName: String(formData.get("contactName") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
+      arrivalTime: String(formData.get("arrivalTime") ?? ""),
+      petType: String(formData.get("petType") ?? ""),
+      serviceItem: String(formData.get("serviceItem") ?? ""),
+      note: String(formData.get("note") ?? ""),
+    };
+
+    try {
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Booking request failed");
+      }
+
+      form.reset();
+      setSubmitted(true);
+    } catch {
+      setError("预约提交失败，请稍后再试或直接电话联系门店。");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -70,11 +107,19 @@ export default function BookingForm() {
         <textarea name="note" rows={3} placeholder="可填写体重、毛量、怕水怕风、皮肤状态等" />
       </label>
 
-      <button type="submit">提交预约信息</button>
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "提交中..." : "提交预约信息"}
+      </button>
 
       {submitted ? (
         <p className="booking-success" role="status">
           预约已收到，我们会尽快联系你确认具体到店时间。
+        </p>
+      ) : null}
+
+      {error ? (
+        <p className="booking-error" role="alert">
+          {error}
         </p>
       ) : null}
     </form>

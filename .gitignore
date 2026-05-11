@@ -35,6 +35,9 @@ pnpm-debug.log*
 # Vercel
 .vercel/
 
+# Netlify
+.netlify/
+
 # OS and editor files
 .DS_Store
 Thumbs.db
