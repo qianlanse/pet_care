@@ -468,15 +468,30 @@ h1 {
   transform: translateY(1px) scale(0.99);
 }
 
-.booking-success {
+.booking-form button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+  transform: none;
+}
+
+.booking-success,
+.booking-error {
   margin: 12px 0 0;
   padding: 12px 14px;
   border-radius: 14px;
-  background: rgba(111, 139, 116, 0.12);
-  color: var(--sage-deep);
   font-size: 13px;
   font-weight: 800;
   line-height: 1.55;
+}
+
+.booking-success {
+  background: rgba(111, 139, 116, 0.12);
+  color: var(--sage-deep);
+}
+
+.booking-error {
+  background: rgba(188, 82, 61, 0.12);
+  color: #8d3b2b;
 }
 
 .hero-badge strong {

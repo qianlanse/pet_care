@@ -195,6 +195,37 @@ test("booking form places expected arrival time below contact and phone", () => 
   assert.match(styles, /\.booking-wide/);
 });
 
+test("booking form submits appointments through a server Postgres route", () => {
+  assert.ok(exists("app/api/bookings/route.ts"));
+  assert.ok(exists(".env.example"));
+
+  const form = read("app/components/BookingForm.tsx");
+  const route = read("app/api/bookings/route.ts");
+  const envExample = read(".env.example");
+  const pkg = JSON.parse(read("package.json"));
+
+  assert.ok(pkg.dependencies.pg);
+  assert.match(form, /fetch\("\/api\/bookings"/);
+  assert.match(form, /method: "POST"/);
+  assert.match(form, /FormData/);
+  assert.match(form, /const form = event\.currentTarget/);
+  assert.match(form, /new FormData\(form\)/);
+  assert.match(form, /form\.reset\(\)/);
+  assert.doesNotMatch(form, /event\.currentTarget\.reset\(\)/);
+  assert.match(form, /booking-error/);
+  assert.match(route, /POSTGRES_SESSION_POOL_URL/);
+  assert.match(route, /runtime = "nodejs"/);
+  assert.match(route, /insert into public\.appointments/);
+  assert.match(route, /contact_name/);
+  assert.match(route, /arrival_time/);
+  assert.match(route, /pet_type/);
+  assert.match(route, /service_item/);
+  assert.match(envExample, /POSTGRES_SESSION_POOL_URL/);
+  assert.match(envExample, /postgres\.yfybrozujzzsytcpswwv/);
+  assert.match(envExample, /aws-1-us-west-2\.pooler\.supabase\.com:5432/);
+  assert.match(envExample, /pooler\.supabase\.com:5432/);
+});
+
 test("location section uses a full-bleed map image with absolute store info overlay", () => {
   const page = read("app/page.tsx");
   const styles = read("app/globals.css");
